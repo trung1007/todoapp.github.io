@@ -84,14 +84,80 @@
 // }
 
 
+// xử lý login
+
+var login = document.querySelector(".login");
+var active = document.querySelector(".wrapper");
+var username = document.querySelector("#username");
+var userpassword = document.querySelector("#userpassword");
+var loginbtn = document.querySelector(".login-input");
+
+username.onkeyup = () => {
+    let getusername = username.value;
+    if (getusername.trim() != 0) {
+        loginbtn.classList.add("in");
+    }
+    else {
+        loginbtn.classList.remove("in");
+    }
+}
+
+userpassword.onkeyup = () => {
+    let getuserpassword = userpassword.value;
+    if (getuserpassword.trim() != 0) {
+        loginbtn.classList.add("in");
+    }
+    else {
+        loginbtn.classList.remove("in");
+    }
+}
+
+userpassword.addEventListener("keyup", e => {
+    let getusername = username.value.trim();
+    let getuserpassword = userpassword.value.trim();
+    if (e.key == "Enter" && getuserpassword && getusername) {
+        var nameactive = document.querySelector(".nameactive");
+        nameactive.textContent = username.value;
+        username.value = "";
+        userpassword.value = "";
+        loginbtn.classList.remove("in");
+        login.classList.add("login-up")
+        active.classList.add("todoactive");
+    }
+    else {
+        login.classList.remove("login-up");
+        active.classList.remove("todoactive");
+    }
+});
+
+loginbtn.onclick = () => {
+    let getusername = username.value.trim();
+    let getuserpassword = userpassword.value.trim();
+    if (getuserpassword && getusername) {
+        var nameactive = document.querySelector(".nameactive");
+        nameactive.textContent = username.value;
+        username.value = "";
+        userpassword.value = "";
+        loginbtn.classList.remove("in");
+        login.classList.add("login-up")
+        active.classList.add("todoactive");
+    }
+    else {
+        login.classList.remove("login-up");
+        active.classList.remove("todoactive");
+    }
+}
 
 
-const inputBox = document.querySelector(".input-Field input")
-const addButton = document.querySelector(".input-Field button");
+
+// xử lý todoList
+
+const inputBox = document.querySelector(".getinput")
+const addButton = document.querySelector(".addtasks");
 var addTask = document.querySelector(".todoList");
+const pendingTasksNumb = document.querySelector(".pendingTasks");
 
-
-var ClearButton = document.querySelector(".clear");
+var clearAllbtn = document.querySelector(".clear");
 
 let todos = JSON.parse(localStorage.getItem("todo-list"));
 
@@ -104,8 +170,6 @@ inputBox.onkeyup = () => {
         addButton.classList.remove("active");
     }
 }
-
-
 inputBox.addEventListener("keyup", e => {
     let userTask = inputBox.value.trim();
     if (e.key == "Enter" && userTask) {
@@ -120,43 +184,35 @@ inputBox.addEventListener("keyup", e => {
     }
 });
 
-
-
-// function clearAll() {
+// clearAllbtn.onclick = () => {
 //     console.log("123");
-//     todos.splice(0, todos.length());
-//     localStorage.setItem("todo-list", JSON.stringify(todos));
-//     showTodoList();
 // }
 
+clearAllbtn.addEventListener("click", ()=>{
+    console.log("123");
+    todos.splice(0, todos.length);
+    localStorage.setItem("todo-list", JSON.stringify(todos));
+    showTodoList();
+});
 
-
-// ClearButton.addEventListener("click",e =>{
-//     console.log("123");
-// //     todos.splice(0, todos.length());
-// //     localStorage.setItem("todo-list", JSON.stringify(todos));
-// //     showTodoList();
-// });
 
 function showTodoList() {
-    //var div=document.createElement('div');
     let div = "";
     if (todos) {
         todos.forEach((todo, id) => {
             div += `<div class="tasks">
-                    <div class="process">
-                        <span class="task_name">${todo.name}</span>
-                    </div>
-                 <div>
+                        <div class="process">
+                            <span class="task_name">${todo.name}</span>
+                        </div>
+                    <div>
                     <button class="checked" onclick="done(this)">
-                        <i class="fa-solid fa-check" >
-                        </i>
+                        <i class="fa-solid fa-check"></i>
                     </button>
                      <button class="unchecked" onclick="failed(this)">
                         <i class="fa-solid fa-xmark"></i>
                     </button>
                     <button class="remove" onclick="remove(${id})">
-                    <i class="fa-solid fa-trash"></i>
+                        <i class="fa-solid fa-trash"></i>
                     </button>
                 </div>
             </div>`;
@@ -170,16 +226,18 @@ showTodoList();
 
 
 function done(selectedTask) {
-    var taskname=selectedTask.parentElement.parentElement.firstElementChild;
-    if(selectedTask.onclick){
+    var taskname = selectedTask.parentElement.parentElement.firstElementChild;
+    if (selectedTask.onclick) {
         taskname.classList.toggle("done");
+        taskname.classList.remove("failed");
     }
 }
 
 function failed(selectedTask) {
-    var taskname=selectedTask.parentElement.parentElement.firstElementChild;
-    if(selectedTask.onclick){
+    var taskname = selectedTask.parentElement.parentElement.firstElementChild;
+    if (selectedTask.onclick) {
         taskname.classList.toggle("failed");
+        taskname.classList.remove("done");
     }
 }
 
@@ -188,3 +246,33 @@ function remove(deleteID) {
     localStorage.setItem("todo-list", JSON.stringify(todos));
     showTodoList();
 }
+
+
+
+
+
+
+// xử lý logout
+
+var settingbtn = document.querySelector(".btn-setting");
+var logout = document.querySelector(".logout")
+
+settingbtn.onclick = () => {
+    console.log("123");
+    logout.classList.toggle("logout-out");
+    active.classList.toggle("logout-setting");
+    inputBox.classList.toggle("logout-setting");
+}
+
+var logoutbtn = document.querySelector(".setting-logout");
+
+logoutbtn.onclick = () => {
+    active.classList.remove("logout-setting");
+    inputBox.classList.remove("logout-setting");
+    logout.classList.remove("logout-out");
+    login.classList.remove("login-up");
+    active.classList.remove("todoactive");
+
+}
+
+

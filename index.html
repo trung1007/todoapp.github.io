@@ -10,7 +10,89 @@
     <script src="https://kit.fontawesome.com/6a26be7714.js" crossorigin="anonymous"></script>
 
     <title>TodosApp</title>
+</head><!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="main.js">
+    <link rel="stylesheet" href="./img/iStock-1173780504.jpg">
+    <script src="https://kit.fontawesome.com/6a26be7714.js" crossorigin="anonymous"></script>
+
+    <title>TodosApp</title>
 </head>
+
+<body>
+    <div class="login">
+        <div class="content">
+            <h3>
+                Login
+            </h3>
+            <i class="fa-solid fa-user"></i>
+            <span>Tên đăng nhập</span><br>
+            <input type="text" placeholder="account"id="username"> <br>
+            <i class="fa-solid fa-lock"></i>
+            <span>Mật khẩu</span><br>
+            <input type="password" placeholder="password" id="userpassword"> <br>
+            <input type="checkbox"> <span>Nhớ mật khẩu</span>
+            <button class="login-input">Login</button>
+        </div>
+        <div class="demo">
+            
+        </div>
+        
+    </div>
+
+
+    <div class="wrapper">
+        <div class="user">
+            <i class="fa-solid fa-user"></i>
+            <span class="nameactive"></span>
+            <button class="btn-setting">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        <header>Daily Task</header>
+        <div class="input-Field">
+            <input type="text" placeholder="Enter New Task" class="getinput">
+            <button class="addtasks">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+        </div>
+        <h3>Today's Task</h3>
+        <div class="todoList">
+            
+        </div>
+        
+        <div class="footer">
+            <span>You have
+                <span class="pendingTasks"></span>
+                pending tasks
+            </span>
+            <button class="clear">Clear All</button>
+        </div>
+        <div class="logout">
+            <button class="setting-in4">Information</button> <br>
+            <button class="setting">Setting</button> <br>
+            <button class="setting-help">Help</button> <br>
+            <button class="setting-logout">Logout</button>
+            
+        </div>
+
+    </div>
+
+
+
+
+    <script src="./main.js">
+
+    </script>
+</body>
+
+</html>
 
 <body>
     <div class="wrapper">
